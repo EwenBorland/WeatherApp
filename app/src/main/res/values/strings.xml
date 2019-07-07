@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+    <string name="textView_location_str">55.9471,-3.2052</string>
+    <string name="button_label">Request</string>
+    <string name="resultTextView_label">TextView</string>
+    <string name="error_requestFailed">Request failed</string>
+    <string name="location">55.9471,-3.2051</string>
+</resources>
