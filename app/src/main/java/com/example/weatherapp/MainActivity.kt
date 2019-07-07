@@ -15,6 +15,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_main.*
+import org.json.JSONObject
 
 import java.util.*
 
@@ -22,21 +23,31 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var locationTextview: TextView
-    lateinit var myResponseHolder: TextView
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewManager: RecyclerView.LayoutManager
+
+    private lateinit var locationTextview: TextView
+    private var weatherArray: MutableList<MutableList<String>> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        viewManager = LinearLayoutManager(this)
+        viewAdapter = MainAdapter(weatherArray, this)
+        recyclerView = findViewById<RecyclerView>(R.id.main_recycler_view).apply{
+            layoutManager = viewManager
+            adapter = viewAdapter
+        }
 
         locationTextview = findViewById(R.id.textView_location)
-        myResponseHolder = findViewById(R.id.box_thing)
+
         val requestButton: Button = findViewById(R.id.request_button)
-        requestButton.setOnClickListener{ getWeather(myResponseHolder) }
+        requestButton.setOnClickListener{ getWeather(weatherArray) }
     }
 
 
-    private fun getWeather(response_out: TextView) {
+    private fun getWeather(responseArray: MutableList<MutableList<String>>) {
 
         val queue = Volley.newRequestQueue(this)
         val loc: String = locationTextview.text.toString()
@@ -45,8 +56,8 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, url, Toast.LENGTH_LONG).show()
         val stringRequest = StringRequest(Request.Method.GET, url,
                 Response.Listener<String> { response ->
-                    response_out.setText(response)
-
+                    responseArray.add(0, getTemperature(response))
+                    recyclerView.adapter?.notifyItemInserted(0)
                 },
                 Response.ErrorListener { url + " : " + getString(R.string.error_requestFailed) })
         // Toast.makeText(this, "making request", Toast.LENGTH_LONG).show()
