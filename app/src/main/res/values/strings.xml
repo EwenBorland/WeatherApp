@@ -5,4 +5,7 @@
     <string name="resultTextView_label">TextView</string>
     <string name="error_requestFailed">Request failed</string>
     <string name="location">55.9471,-3.2051</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
