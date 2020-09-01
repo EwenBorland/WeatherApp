@@ -1,17 +1,18 @@
 package com.example.weatherapp
 
+
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -21,9 +22,9 @@ import java.util.ArrayList
 
 /**
  Forecast Fragment
- the main view of the app, shows weather forecast for all locations
+ the home view of the app, shows weather forecast for all locations, can navigate to settings
  */
-class ForecastFragment : Fragment() {
+class ForecastFragment : Fragment(){
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
@@ -40,6 +41,7 @@ class ForecastFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_forecast, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewManager = LinearLayoutManager(this.context)
@@ -55,6 +57,7 @@ class ForecastFragment : Fragment() {
 
         val requestButton: Button = request_button
         requestButton.setOnClickListener{ getWeather(weatherArray) }
+//        requestButton.setOnClickListener{(activity as MainActivity).replaceFragment("hiya")}
     }
 
     private fun getWeather(responseArray: MutableList<MutableList<String>>) {
