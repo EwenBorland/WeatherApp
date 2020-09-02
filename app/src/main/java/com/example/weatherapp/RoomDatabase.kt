@@ -12,7 +12,7 @@ data class Location(
     @ColumnInfo(name = "location_name") val locationName: String?,
     @ColumnInfo(name = "latitude_value") val latitude: Float?,
     @ColumnInfo(name = "longitude_value") val longitude: Float?,
-    @ColumnInfo(name = "forecast_list") val forecasts: List<Dictionary<Int,Forecast>>
+    @ColumnInfo(name = "forecast_list") val forecasts: String
 )
 
 @Entity

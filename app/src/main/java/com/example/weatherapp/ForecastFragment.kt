@@ -63,9 +63,11 @@ class ForecastFragment : Fragment(){
     private fun getWeather(responseArray: MutableList<MutableList<String>>) {
 
         val queue = Volley.newRequestQueue(this.context)
-        val loc: String = locationTextview.text.toString()
+//        val loc: String = locationTextview.text.toString()
+        val loc = getString(R.string.temp_location)
         val key: String = getString(R.string.DARKYSKY_KEY)
-        val url = "https://api.darksky.net/forecast/" + key + "/" + loc + "?exclude=[currently,minutely,daily]"
+
+        val url = "https://api.darksky.net/forecast/" + key + "/" + loc + "?exclude=[currently,minutely]"
         Toast.makeText(this.context, url, Toast.LENGTH_LONG).show()
         val stringRequest = StringRequest(
             Request.Method.GET, url,

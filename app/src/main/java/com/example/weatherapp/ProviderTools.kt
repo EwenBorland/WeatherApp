@@ -5,6 +5,8 @@ package com.example.weatherapp
  * will have functions for requesting forecasts and adapting forecasts into the same format
  */
 
+data class ForecastData(val hourly_forecast: String)
+
 fun getProviderMap(): List<Map<String,String>>{
     return listOf(mapOf("name" to "provider 1","key" to "asdfghjkl123"), mapOf("name" to "provider dos","key" to "qwertyuiop9876"))
 }
